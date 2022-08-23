@@ -8,6 +8,7 @@ import DateofBirth from './components/currentdate/currentdate'
 import RadioComp from './components/radioComponent/radioComponent'
 import SelectDropDown from './components/selectdropdown/dropdownselect'
 import InputFile  from './components/inputfile/inputfile'
+import RangeComponent from './components/rangeComponent/rangeComponent'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -20,6 +21,7 @@ root.render(
     <DateofBirth></DateofBirth>
     <SelectDropDown></SelectDropDown>
     <RadioComp></RadioComp>
+    <RangeComponent></RangeComponent>
     <input  style={{marginLeft: "35%",marginTop: "1%"}} type="submit" value="Submit" />
     </form>
   </React.StrictMode>
