@@ -8,8 +8,8 @@ export default function DateofBirth() {
     
     const getDate = (date) => setStartDate(date)
 
-  return (  <div style={{marginLeft: "35%",}}>
-    <h2>Select Date of Birth :</h2>
+  return (  <div style={{marginLeft: "30%",}}>
+    <h4>Select Date of Birth :</h4>
     <DatePicker selected={startDate} onChange={getDate} />
 
   </div>

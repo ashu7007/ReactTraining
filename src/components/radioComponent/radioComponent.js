@@ -10,8 +10,8 @@ function RadioComp() {
   }
 
   return (
-    <div style={{marginLeft: "35%",marginTop: "1%"}}>
-          <h2>Select your gender</h2>
+    <div style={{marginLeft: "30%",marginTop: "1%"}}>
+          <h4>Select your gender</h4>
 
           <input
             type="radio"

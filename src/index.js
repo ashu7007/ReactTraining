@@ -1,29 +1,55 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+import form from './index.css';
 // import App from './App';
 import reportWebVitals from './reportWebVitals';
-import NameForm from './components/inputtext/Inputtext';
+import InputComponent from './components/inputtext/Inputtext';
 import DateofBirth from './components/currentdate/currentdate'
 import RadioComp from './components/radioComponent/radioComponent'
 import SelectDropDown from './components/selectdropdown/dropdownselect'
 import InputFile  from './components/inputfile/inputfile'
+import PasswordComponent from './components/passwordFieldComponent/passwordField'
 import RangeComponent from './components/rangeComponent/rangeComponent'
+import RegisterComponent from './components/RegisterComponent/registerForm'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+
+const countries = [
+  {label:"India"},
+  {label:"USA"},
+  {label:"Newzealand"},
+  {label:"Japan"},
+]
+const education = [
+  {label:"PD"},
+  {label:"PG"},
+  {label:"UG"},
+  {label:"Diploma"},
+]
+
+let formCss = {
+  border: '3px solid LightBlue',
+  marginLeft: "25%",
+  marginTop: "5%",
+  marginBottom: "5%",
+  marginRight: "25%",
+
+}
 root.render(
   <React.StrictMode>
     {/* <App /> */}
-    <form>
-    <h1 style={{marginLeft: "35%",color:'blueviolet'}}>User Form</h1>
-    <NameForm></NameForm>
-    <InputFile></InputFile>
+    <RegisterComponent></RegisterComponent>
+    {/* <InputComponent labelName="Name"></InputComponent>
+    <InputComponent labelName="Email"></InputComponent>
     <DateofBirth></DateofBirth>
-    <SelectDropDown></SelectDropDown>
     <RadioComp></RadioComp>
-    <RangeComponent></RangeComponent>
-    <input  style={{marginLeft: "35%",marginTop: "1%"}} type="submit" value="Submit" />
-    </form>
+    <InputFile></InputFile>
+    <SelectDropDown name="level of education" options={education}></SelectDropDown>
+    <PasswordComponent name="Password" ></PasswordComponent>
+    <PasswordComponent name="Confirm Password"></PasswordComponent> */}
+    {/* <RangeComponent></RangeComponent> */}
+
   </React.StrictMode>
 );
 

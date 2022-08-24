@@ -41,23 +41,23 @@ import TextField from "@material-ui/core/TextField";
 //     );
 //   };
 
-const NameForm = () => {
-    const [name, setName] = useState("");
-    
+const InputComponent = (props) => {
+    const [data, setName] = useState("");
+    let labelWord = "Enter your " + props.labelName;
+
     return (
-      <div style={{marginLeft: "35%",}}>
-         <h2>Your Name is: {name} </h2>
+      <div style={{marginLeft: "30%",}}>
+         <h4>{props.labelName} </h4>
         <TextField
-          value={name}
-          label="Enter your name"
+          value={data}
+          label={labelWord}
           onChange={(e) => {
             setName(e.target.value);
           }}
         />
-       
       </div>
     );
   };
   
 
-export default NameForm
+export default InputComponent
