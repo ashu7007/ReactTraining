@@ -49,6 +49,11 @@ function RegisterComponent() {
         setFormValues({ ...formValues, [name]: value });
     };
 
+    const removeHandler = (e) => {
+        console.log(e.target);
+        
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
         setFormErrors(validate(formValues));
@@ -118,94 +123,126 @@ function RegisterComponent() {
             <td>{data.gender}</td>
             <td>{data.eduLevel}</td>
             <td>{data.imgpic}</td>
+            <td >
+                <button className="btn btn-warning mx-2"  onClick={removeHandler}>Edit</button>
+                <button className="btn btn-danger mx-auto">Delete</button>
+            </td>
             
           </tr>
         );
       });
 
   return (
-
-    <div style={{marginLeft: "20%",marginTop: "1%",marginRight: "20%"}} className="container">
-      <form style={formCss} onSubmit={handleSubmit}>
+    <div className="row">
+        <div className="col-5">
+    <div className="container">
+      <div className="card">
+      <form className="p-3 bg-secondary bg-opacity-10 border border-darkrounded-end" onSubmit={handleSubmit}>
         <h1 style={{marginLeft: "20%",marginTop: "1%",marginRight: "20%"}}>User Registration</h1>
         <div style={{marginLeft: "20%",marginTop: "1%",marginRight: "20%"}}>
           
-          <div className="field">
-            <label>Name :</label>
+          
+          <div className="col">
+            <label className="form-label" >Name :</label>
             <br/>
-            <input
+            <input className="form-control"
               type="text"
               name="name"
               placeholder="Name"
               value={formValues.name}
               onChange={handleChange}
             />
+            <p>{formErrors.name}</p>
           </div>
-          <p>{formErrors.name}</p>
-          <div className="field">
-            <label>Email :</label>
+          
+          <div className="col">
+            <label  className="form-label">Email :</label>
             <br/>
             <input
-              type="text"
-              name="email"
-              placeholder="Email"
-              value={formValues.email}
-              onChange={handleChange}
+                className="form-control"
+                type="text"
+                name="email"
+                placeholder="Email"
+                value={formValues.email}
+                onChange={handleChange}
             />
+              <p>{formErrors.email}</p>
           </div>
-          <p>{formErrors.email}</p>
- 
-          <div style={{marginTop: "5%"}} className="field">
-            <label>Select Date of Birth :</label>
-            
-            <DatePicker selected={startDate} value={formValues.dob} onChange={getDate} />
-          </div>
-
-        <div style={{marginTop: "5%"}} className="field">
           
-          <label>Select your gender</label>
-          <br/>
-          <input
-            type="radio"
-            name="gender"
-            id='gender-1'
-            value="male"
-            onChange={handleChange}
-            // checked={gender === 'male'} 
-            />
-          <label htmlFor="gender-1">male</label><br />
 
-          <input
-            type="radio"
-            name="gender"
-            id='gender-2'
-            value="female"
-            onChange={handleChange}
-            // 
-            />
-          <label htmlFor="gender-2">female</label><br />
 
-        </div>
+         
+            <div className="col">
+                <label>Select Date of Birth :</label>
+                <input class="form-control" name="dob" onChange={handleChange} type="date" />
+                {/* <DatePicker selected={startDate} value={formValues.dob} onChange={getDate} /> */}
+            </div>
+
+            <div className="col">
+          
+                <label>Select your gender</label>
+                <br/>
+                <div className="row">
+                    <div className="col">
+                    <input
+                    className="form-check-input"
+                    type="radio"
+                    name="gender"
+                    id='gender-1'
+                    value="male"
+                    onChange={handleChange}
+                    // checked={gender === 'male'} 
+                    />
+                <label htmlFor="gender-1">male</label><br />
+                    </div>
+                    <div className="col">
+                    <input
+                    className="form-check-input"
+                    type="radio"
+                    name="gender"
+                    id='gender-2'
+                    value="female"
+                    onChange={handleChange}
+                    // 
+                    />
+                <label htmlFor="gender-2">female</label><br />
+                    </div>
+                </div>
+                
+            </div>
+
+         
+ 
+         
+
+        
 
         {/* image Upload */}
-        <div style={{marginTop: "5%"}}>
+        <div className="col my-3">
          <label>Upload Your Profile Pic: </label>
          <br/>
-         <input type="file" accept="image/*" name="imgpic" onChange={handleChange}/>
+         <input className="form-control" type="file" accept="image/*" name="imgpic" onChange={handleChange}/>
        
         </div>
         <p>{formErrors.pic}</p>
 
 
-          <div style={{marginTop: "5%"}}>
+          <div className="col my-3">
           <label>Level of Education</label>
-          <Select options={education}></Select>
+          <select name="eduLevel"class="form-select" onChange={handleChange}aria-label="Default select example">
+            <option  value="UG">UG</option>
+            <option value="PG" >PG</option>
+            <option value="PHD" >PHD</option>
+            <option value="Diploma">Diploma</option>
+          </select>
+          {/* <Select options={education}></Select> */}
           </div>
 
-          <div style={{marginTop: "5%"}} className="field">
+          <div className="col my-3">
             <label>Password</label>
             <br/>
             <input
+                className="form-control"
               type="password"
               name="password"
               placeholder="Password"
@@ -215,10 +252,11 @@ function RegisterComponent() {
           </div>
           <p>{formErrors.password}</p>
 
-          <div style={{marginTop: "5%"}} className="field">
+          <div className="col my-3">
             <label>Confirm Password</label>
             <br/>
             <input
+                className="form-control"
               type="password"
               name="conpassword"
               placeholder="Confirm Password"
@@ -227,30 +265,37 @@ function RegisterComponent() {
             />
           </div>
           <p>{formErrors.conpassword}</p>
-          <button className="fluid ui button blue" on>Submit</button>
+          <button className="btn btn-primary mb-4">Submit</button>
         </div>
       </form>
+      </div>
 
+       
+        
+    </div>
+    </div>
+        <div className="col">
         <div>
         
-            <table className="table">
-                <thead>
-                    <tr>
-                    <th >Name</th>
-                    <th >Eamil</th>
-                    <th >Birth Date</th>
-                    <th >Gender</th>
-                    <th >Education QF</th>
-                    <th >Pic</th>
+        <table className="table">
+            <thead>
+                <tr>
+                <th >Name</th>
+                <th >Eamil</th>
+                <th >Birth Date</th>
+                <th >Gender</th>
+                <th >Education QF</th>
+                <th >Pic</th>
+                <th >Action</th>
 
-                    </tr>
-                </thead>
-                <tbody>
-                {tableRows}
-                </tbody>
-            </table>
+                </tr>
+            </thead>
+            <tbody>
+            {tableRows}
+            </tbody>
+        </table>
+    </div>
         </div>
-        
     </div>
   );
 }

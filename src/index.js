@@ -1,16 +1,17 @@
-import React from 'react';
+import React,{useState} from 'react';
 import ReactDOM from 'react-dom/client';
 import form from './index.css';
 // import App from './App';
 import reportWebVitals from './reportWebVitals';
-import InputComponent from './components/inputtext/Inputtext';
-import DateofBirth from './components/currentdate/currentdate'
-import RadioComp from './components/radioComponent/radioComponent'
-import SelectDropDown from './components/selectdropdown/dropdownselect'
-import InputFile  from './components/inputfile/inputfile'
-import PasswordComponent from './components/passwordFieldComponent/passwordField'
-import RangeComponent from './components/rangeComponent/rangeComponent'
+// import InputComponent from './components/inputtext/Inputtext';
+// import DateofBirth from './components/currentdate/currentdate'
+// import RadioComp from './components/radioComponent/radioComponent'
+// import SelectDropDown from './components/selectdropdown/dropdownselect'
+// import InputFile  from './components/inputfile/inputfile'
+// import PasswordComponent from './components/passwordFieldComponent/passwordField'
+// import RangeComponent from './components/rangeComponent/rangeComponent'
 import RegisterComponent from './components/RegisterComponent/registerForm'
+import TableComponent from './components/tableComponent/tableComponent';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -36,10 +37,13 @@ let formCss = {
   marginRight: "25%",
 
 }
+
+const listItem= [];
 root.render(
   <React.StrictMode>
     {/* <App /> */}
     <RegisterComponent></RegisterComponent>
+    {/* <TableComponent item={listItem}></TableComponent> */}
     {/* <InputComponent labelName="Name"></InputComponent>
     <InputComponent labelName="Email"></InputComponent>
     <DateofBirth></DateofBirth>
