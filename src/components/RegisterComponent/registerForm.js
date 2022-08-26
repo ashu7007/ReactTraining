@@ -50,9 +50,24 @@ function RegisterComponent() {
     };
 
     const removeHandler = (e) => {
-        console.log(e.target);
+        listItem.splice(e, 1)
+        setlistItem(listItem => [...listItem])
         
     };
+
+    const handleChoosedRow = (row) => {
+        console.log("choosed flight", row);
+        setFormValues({ name: row.name, 
+                        email: row.email, 
+                        dob:row.dob,
+                        imgpic:row.imgpic,
+                        gender:row.gender,
+                        eduLevel:row.eduLevel,
+                        password:row.password,
+                        conpassword:row.conpassword,
+                    });
+
+      };
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -124,8 +139,8 @@ function RegisterComponent() {
             <td>{data.eduLevel}</td>
             <td>{data.imgpic}</td>
             <td >
-                <button className="btn btn-warning mx-2"  onClick={removeHandler}>Edit</button>
-                <button className="btn btn-danger mx-auto">Delete</button>
+                <button className="btn btn-warning mx-2" data-item={data} onClick={() => handleChoosedRow(data)}>Edit</button>
+                <button className="btn btn-danger mx-auto" onClick={() => removeHandler(index)}>Delete</button>
             </td>
             
           </tr>
@@ -152,7 +167,7 @@ function RegisterComponent() {
               value={formValues.name}
               onChange={handleChange}
             />
-            <p>{formErrors.name}</p>
+            <p className="text-danger">{formErrors.name}</p>
           </div>
           
           <div className="col">
@@ -166,7 +181,7 @@ function RegisterComponent() {
                 value={formValues.email}
                 onChange={handleChange}
             />
-              <p>{formErrors.email}</p>
+              <p className="text-danger">{formErrors.email}</p>
           </div>
           
 
@@ -224,7 +239,7 @@ function RegisterComponent() {
          <input className="form-control" type="file" accept="image/*" name="imgpic" onChange={handleChange}/>
        
         </div>
-        <p>{formErrors.pic}</p>
+        <p className="text-danger">{formErrors.pic}</p>
 
 
           <div className="col my-3">
@@ -250,7 +265,7 @@ function RegisterComponent() {
               onChange={handleChange}
             />
           </div>
-          <p>{formErrors.password}</p>
+          <p className="text-danger">{formErrors.password}</p>
 
           <div className="col my-3">
             <label>Confirm Password</label>
@@ -264,7 +279,7 @@ function RegisterComponent() {
               onChange={handleChange}
             />
           </div>
-          <p>{formErrors.conpassword}</p>
+          <p className="text-danger">{formErrors.conpassword}</p>
           <button className="btn btn-primary mb-4">Submit</button>
         </div>
       </form>
