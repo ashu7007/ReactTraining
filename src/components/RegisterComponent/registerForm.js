@@ -22,11 +22,14 @@ function RegisterComponent() {
     const [formValues, setFormValues] = useState(initialValues);
     const [formErrors, setFormErrors] = useState({});
     const [isSubmit, setIsSubmit] = useState(false);
+    const [isEdit, setIsEdit] = useState(false);
+    const [isCancel, setIsCancel] = useState(false);
+    const [currentItem, setCurrentItem] = useState(null);
 
     const [startDate, setStartDate] = useState(new Date()); 
     const getDate = (date) => setStartDate(date)
 
-    const [gender, setgender] = useState();
+    // const [gender, setgender] = useState();
 
     const education = [
         {label:"PD"},
@@ -55,8 +58,10 @@ function RegisterComponent() {
         
     };
 
-    const handleChoosedRow = (row) => {
-        console.log("choosed flight", row);
+    const handleChoosedRow = (row,index) => {
+        setCurrentItem(index);
+        setIsEdit(true);
+        handlerButton();
         setFormValues({ name: row.name, 
                         email: row.email, 
                         dob:row.dob,
@@ -68,6 +73,44 @@ function RegisterComponent() {
                     });
 
       };
+
+
+      const onEdit = (e) => {
+        e.preventDefault();
+        setFormErrors(validate(formValues));
+        // setIsSubmit(true);
+        listItem[currentItem]= formValues;
+        setlistItem(listItem => [...listItem]);
+        setIsEdit(false);
+        handlerButton();
+        console.log(e);
+
+        // setlistItem(...formValues);
+        setFormValues({ name: "", 
+                        email: "", 
+                        dob:"",
+                        imgpic:"",
+                        gender:"",
+                        eduLevel:"",
+                        password: "",
+                        conpassword:"",
+                    });
+    };
+
+    const handleCancel = () => {
+        setIsSubmit(true);
+        setIsEdit(false);
+        handlerButton();
+        setFormValues({ name: "", 
+                        email: "", 
+                        dob:"",
+                        imgpic:"",
+                        gender:"",
+                        eduLevel:"",
+                        password: "",
+                        conpassword:"",
+                    });
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -128,7 +171,22 @@ function RegisterComponent() {
         return errors;
     };
 
+    const handlerButton = ()=>{
+        if(isEdit===true)
+        {
+        return(
+            <div className="d-flex justify-content-between">
+                <button className="btn btn-primary mb-4 " onClick={onEdit}>Edit</button>
+                <button className="btn btn-danger mb-4" onClick={handleCancel}>Cancel</button>
+            </div>)
 
+        }
+        else {return(
+            <div>
+          <button className="btn btn-primary mb-4">Submit</button>
+        </div>
+        )}
+    }
     const tableRows = listItem.map((data,index) => {
         return (
           <tr key={index}>
@@ -137,9 +195,9 @@ function RegisterComponent() {
             <td>{data.dob}</td>
             <td>{data.gender}</td>
             <td>{data.eduLevel}</td>
-            <td>{data.imgpic}</td>
+            <td><img width="30" height="30" src="https://st.depositphotos.com/2101611/3925/v/950/depositphotos_39258143-stock-illustration-businessman-avatar-profile-picture.jpg"/></td>
             <td >
-                <button className="btn btn-warning mx-2" data-item={data} onClick={() => handleChoosedRow(data)}>Edit</button>
+                <button className="btn btn-warning mx-2" data-item={data} onClick={() => handleChoosedRow(data,index)}>Edit</button>
                 <button className="btn btn-danger mx-auto" onClick={() => removeHandler(index)}>Delete</button>
             </td>
             
@@ -280,7 +338,8 @@ function RegisterComponent() {
             />
           </div>
           <p className="text-danger">{formErrors.conpassword}</p>
-          <button className="btn btn-primary mb-4">Submit</button>
+          {/* <button className="btn btn-primary mb-4">Submit</button> */}
+          {handlerButton()}
         </div>
       </form>
       </div>
@@ -292,7 +351,7 @@ function RegisterComponent() {
         <div className="col">
         <div>
         
-        <table className="table">
+        <table className="table table-striped">
             <thead>
                 <tr>
                 <th >Name</th>
