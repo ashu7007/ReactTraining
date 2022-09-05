@@ -60,7 +60,7 @@ export const formDataSlice= createSlice({
   reducers: {
 
     addUser: (state) => {
-        validate(state.formValues);
+        state.formErrors = validate(state.formValues);
         state.IsSubmit=true;
         state.formErrors = {};
         state.listItem =  [...state.listItem, state.formValues];
@@ -78,8 +78,10 @@ export const formDataSlice= createSlice({
 
     updateUser: (state) => {
       // setFormErrors(validate(formValues));
+        
         state.IsSubmit=true;
         state.listItem[state.currentItem]= state.formValues;
+        state.formErrors = validate(state.formValues);
         state.listItem = [...state.listItem];
         state.isEdit=false;
         state.formValues={ name: "", 
@@ -129,7 +131,7 @@ export const formDataSlice= createSlice({
                       password: "",
                       conpassword:"",
                   };
-        }
+        },
   }
 })
 

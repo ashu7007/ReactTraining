@@ -13,7 +13,7 @@ function RegisterComponent() {
     const formValues = useSelector((state) => state.formValue.formValues);
     const listItem = useSelector((state) => state.formValue.listItem);
     
-    const formErrors = useSelector((state) => state.formErrors);
+    const formErrors = useSelector((state) => state.formValue.formErrors);
     const isSubmit = useSelector((state) => state.formValue.IsSubmit);
     const isEdit = useSelector((state) => state.formValue.isEdit);
     const currentItem = useSelector((state) => state.formValue.currentItem);
@@ -79,7 +79,7 @@ function RegisterComponent() {
     };
 
     const handleSubmit = (e) => {
-        console.log(e.target.name.value);
+        
         // console.log(formValues);
         e.preventDefault();
         // validate(formValues);
@@ -187,7 +187,7 @@ function RegisterComponent() {
               value={formValues.name}
               onChange={handleChange}
             />
-            {/* <p className="text-danger">{formErrors.name}</p> */}
+            <p className="text-danger">{formErrors.name}</p>
           </div>
           
           <div className="col">
@@ -201,7 +201,7 @@ function RegisterComponent() {
                 value={formValues.email}
                 onChange={handleChange}
             />
-              {/* <p className="text-danger">{formErrors.email}</p> */}
+              <p className="text-danger">{formErrors.email}</p>
           </div>
           
 
@@ -259,7 +259,7 @@ function RegisterComponent() {
          <input className="form-control" type="file" accept="image/*" name="imgpic" onChange={handleChange}/>
        
         </div>
-        {/* <p className="text-danger">{formErrors.pic}</p> */}
+        <p className="text-danger">{formErrors.pic}</p>
 
 
           <div className="col my-3">
@@ -285,7 +285,7 @@ function RegisterComponent() {
               onChange={handleChange}
             />
           </div>
-          {/* <p className="text-danger">{formErrors.password}</p> */}
+          <p className="text-danger">{formErrors.password}</p>
 
           <div className="col my-3">
             <label>Confirm Password</label>
@@ -299,7 +299,7 @@ function RegisterComponent() {
               onChange={handleChange}
             />
           </div>
-          {/* <p className="text-danger">{formErrors.conpassword}</p> */}
+          <p className="text-danger">{formErrors.conpassword}</p>
           {/* <button className="btn btn-primary mb-4">Submit</button> */}
           {handlerButton()}
         </div>
