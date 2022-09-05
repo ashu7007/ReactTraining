@@ -87,6 +87,11 @@ export const formDataSlice= createSlice({
     updateFormValues: (state, action)=>{
       console.log(action.payload.name);
       state.formValues ={...state.formValues, [action.payload.name]: action.payload.value};
+    },
+
+    deleteRecord: (state, action)=>{
+      state.listItem.splice(action.payload.index, 1);
+      state.listItem = [...state.listItem];
     }
   }
 })
@@ -97,6 +102,6 @@ export const formDataSlice= createSlice({
 //     }
 //   })
 // Action creators are generated for each case reducer function
-export const { addUser, removeUser, updateUser, updateFormValues } = formDataSlice.actions
+export const { addUser, removeUser, updateUser, updateFormValues, deleteRecord } = formDataSlice.actions
 
 export default formDataSlice.reducer

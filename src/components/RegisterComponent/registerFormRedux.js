@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import DatePicker from "react-datepicker"; 
 import Select from "react-select";
 import { useSelector, useDispatch } from 'react-redux'
-import { addUser,updateFormValues} from "../../reducer/reducer";
+import { addUser,updateFormValues, deleteRecord} from "../../reducer/reducer";
 
 import "react-datepicker/dist/react-datepicker.css";  
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -55,9 +55,8 @@ function RegisterComponent() {
         // setFormValues({ ...formValues, [name]: value });
     };
 
-    const removeHandler = (e) => {
-        // listItem.splice(e, 1)
-        // setlistItem(listItem => [...listItem])
+    const removeHandler = (index) => {
+      dispatch(deleteRecord(index));
         
     };
 
