@@ -2,16 +2,16 @@ import { useEffect } from "react";
 import DatePicker from "react-datepicker"; 
 import Select from "react-select";
 import { useSelector, useDispatch } from 'react-redux'
-import { addUser } from "../../reducer/reducer";
+import { addUser,updateFormValues} from "../../reducer/reducer";
 
 import "react-datepicker/dist/react-datepicker.css";  
 import "bootstrap/dist/css/bootstrap.min.css";
 
 
 function RegisterComponent() {
-    console.log((state) => state.store.listItem);
-    const formValues = useSelector((state) => state.formValues);
-    const listItem = useSelector((state) => state.listItem);
+    
+    const formValues = useSelector((state) => state.formValue.formValues);
+    const listItem = useSelector((state) => state.formValue.listItem);
     
     const formErrors = useSelector((state) => state.formErrors);
     const isSubmit = useSelector((state) => state.IsSubmit);
@@ -50,7 +50,8 @@ function RegisterComponent() {
 
 
     const handleChange = (e) => {
-        // const { name, value } = e.target;
+        const { name, value } = e.target;
+        dispatch(updateFormValues({name,value}));
         // setFormValues({ ...formValues, [name]: value });
     };
 
@@ -115,9 +116,11 @@ function RegisterComponent() {
     };
 
     const handleSubmit = (e) => {
+        console.log(e.target.name.value);
+        // console.log(formValues);
         e.preventDefault();
         // validate(formValues);
-        // dispatch(addUser(formValues))
+        dispatch(addUser());
         // setIsSubmit(true);
         // setlistItem(listItem => [...listItem, formValues])
         // console.log(listItem)
@@ -182,23 +185,24 @@ function RegisterComponent() {
         </div>
         )}
     }
-    // const tableRows = listItem.map((data,index) => {
-    //     return (
-    //       <tr key={index}>
-    //         <td>{data.name}</td>
-    //         <td>{data.email}</td>
-    //         <td>{data.dob}</td>
-    //         <td>{data.gender}</td>
-    //         <td>{data.eduLevel}</td>
-    //         <td><img width="30" height="30" src="https://st.depositphotos.com/2101611/3925/v/950/depositphotos_39258143-stock-illustration-businessman-avatar-profile-picture.jpg"/></td>
-    //         <td >
-    //             <button className="btn btn-warning mx-2" data-item={data} onClick={() => handleChoosedRow(data,index)}>Edit</button>
-    //             <button className="btn btn-danger mx-auto" onClick={() => removeHandler(index)}>Delete</button>
-    //         </td>
+    const tableRows = listItem.map((data,index) => {
+      console.log(data);
+        return (
+          <tr key={index}> 
+            <td>{data.name}</td>
+            <td>{data.email}</td>
+            <td>{data.dob}</td>
+            <td>{data.gender}</td>
+            <td>{data.eduLevel}</td>
+            <td><img width="30" height="30" src="https://st.depositphotos.com/2101611/3925/v/950/depositphotos_39258143-stock-illustration-businessman-avatar-profile-picture.jpg"/></td>
+            <td >
+                <button className="btn btn-warning mx-2" data-item={data} onClick={() => handleChoosedRow(data,index)}>Edit</button>
+                <button className="btn btn-danger mx-auto" onClick={() => removeHandler(index)}>Delete</button>
+            </td>
             
-    //       </tr>
-    //     );
-    //   });
+          </tr>
+        );
+      });
 
   return (
     <div className="row">
@@ -360,7 +364,7 @@ function RegisterComponent() {
                 </tr>
             </thead>
             <tbody>
-            {/* {tableRows} */}
+            {tableRows}
             </tbody>
         </table>
     </div>

@@ -59,12 +59,11 @@ export const formDataSlice= createSlice({
 
   reducers: {
 
-    addUser: (state,action) => {
-        console.log(action);
-        validate(action.payload.formValues);
+    addUser: (state) => {
+        validate(state.formValues);
         state.IsSubmit=true;
         state.formErrors = {};
-        state.listItem =  [...state.listItem, action.payload.formValues];
+        state.listItem =  [...state.listItem, state.formValues];
         state.formValues = {   name: "", 
                                 email: "", 
                                 dob:"",
@@ -83,6 +82,11 @@ export const formDataSlice= createSlice({
     },
     updateUser: (state, action) => {
       // state.listItem += action.payload
+    },
+
+    updateFormValues: (state, action)=>{
+      console.log(action.payload.name);
+      state.formValues ={...state.formValues, [action.payload.name]: action.payload.value};
     }
   }
 })
@@ -93,6 +97,6 @@ export const formDataSlice= createSlice({
 //     }
 //   })
 // Action creators are generated for each case reducer function
-export const { addUser, removeUser, updateUser } = formDataSlice.actions
+export const { addUser, removeUser, updateUser, updateFormValues } = formDataSlice.actions
 
 export default formDataSlice.reducer
