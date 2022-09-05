@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 import ReactDOM from 'react-dom/client';
-import form from './index.css';
+// import form from './index.css';
 import store from './app/store'
 import { Provider } from 'react-redux'
 import reportWebVitals from './reportWebVitals';
@@ -9,11 +9,10 @@ import RegisterComponent from './components/RegisterComponent/registerFormRedux'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-const listItem= [];
 root.render(
   <React.StrictMode>
-    <Provider>
-    <RegisterComponent store={store}></RegisterComponent>
+    <Provider store={store}>
+      <RegisterComponent />
     </Provider>
   </React.StrictMode>
 );

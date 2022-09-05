@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, configureStore} from '@reduxjs/toolkit'
 
 
 
@@ -36,8 +36,8 @@ const validate = (values) => {
     return errors;
 };
 
-export const formData= createSlice({
-  name: 'formData',
+export const formDataSlice= createSlice({
+  name: 'store',
   initialState: {
     listItem: [],
     formValues : { name: "", 
@@ -60,10 +60,10 @@ export const formData= createSlice({
   reducers: {
 
     addUser: (state,action) => {
-        action.e.preventDefault();
+        console.log(action);
         validate(action.payload.formValues);
         state.IsSubmit=true;
-        state.formErrors = 
+        state.formErrors = {};
         state.listItem =  [...state.listItem, action.payload.formValues];
         state.formValues = {   name: "", 
                                 email: "", 
@@ -79,15 +79,20 @@ export const formData= createSlice({
 
 
     removeUser: state => {
-      state.listItem -= 1
+      // state.listItem -= 1
     },
     updateUser: (state, action) => {
-      state.listItem += action.payload
+      // state.listItem += action.payload
     }
   }
 })
 
+// const store = configureStore({
+//     reducer: {
+//       someReducer: formDataSlice.reducer,
+//     }
+//   })
 // Action creators are generated for each case reducer function
-export const { addUser, removeUser, updateUser } = formData.actions
+export const { addUser, removeUser, updateUser } = formDataSlice.actions
 
-export default formData.reducer
+export default formDataSlice.reducer

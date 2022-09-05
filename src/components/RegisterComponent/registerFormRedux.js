@@ -1,27 +1,53 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import DatePicker from "react-datepicker"; 
 import Select from "react-select";
 import { useSelector, useDispatch } from 'react-redux'
 import { addUser } from "../../reducer/reducer";
+
 import "react-datepicker/dist/react-datepicker.css";  
 import "bootstrap/dist/css/bootstrap.min.css";
 
 
 function RegisterComponent() {
-
-    const listItem = useSelector(state => state.registerUser.listItem);
-    const formValues = useSelector(state => state.registerUser.formValues);
-    const formErrors = useSelector(state => state.registerUser.formErrors);
-    const isSubmit = useSelector(state => state.registerUser.IsSubmit);
-    const currentItem = useSelector(state => state.registerUser.currentItem);
+    console.log((state) => state.store.listItem);
+    const formValues = useSelector((state) => state.formValues);
+    const listItem = useSelector((state) => state.listItem);
+    
+    const formErrors = useSelector((state) => state.formErrors);
+    const isSubmit = useSelector((state) => state.IsSubmit);
+    const currentItem = useSelector((state) => state.currentItem);
     const dispatch = useDispatch()
 
-    const education = [
-        {label:"PD"},
-        {label:"PG"},
-        {label:"UG"},
-        {label:"Diploma"},
-    ]
+    // const [listItem,setlistItem] = useState([]);
+    // const initialValues = {   name: "", 
+    //                         email: "", 
+    //                         dob:"",
+    //                         imgpic:"",
+    //                         gender:"",
+    //                         eduLevel:"",
+    //                         password: "",
+    //                         conpassword:"",
+                             
+    //                     };
+    // const [formValues, setFormValues] = useState(initialValues);
+    // const [formErrors, setFormErrors] = useState({});
+    // const [isSubmit, setIsSubmit] = useState(false);
+    // const [isEdit, setIsEdit] = useState(false);
+    // const [isCancel, setIsCancel] = useState(false);
+    // const [currentItem, setCurrentItem] = useState(null);
+
+    // const [startDate, setStartDate] = useState(new Date()); 
+    // const getDate = (date) => setStartDate(date)
+
+    // const [gender, setgender] = useState();
+
+    // const education = [
+    //     {label:"PD"},
+    //     {label:"PG"},
+    //     {label:"UG"},
+    //     {label:"Diploma"},
+    // ]
+
 
     const handleChange = (e) => {
         // const { name, value } = e.target;
@@ -90,28 +116,21 @@ function RegisterComponent() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(addUser(formValues));
+        // validate(formValues);
+        // dispatch(addUser(formValues))
         // setIsSubmit(true);
         // setlistItem(listItem => [...listItem, formValues])
         // console.log(listItem)
 
-        // // setlistItem(...formValues);
-        // setFormValues({ name: "", 
-        //                 email: "", 
-        //                 dob:"",
-        //                 imgpic:"",
-        //                 gender:"",
-        //                 eduLevel:"",
-        //                 password: "",
-        //                 conpassword:"",
-        //             });
+        // setlistItem(...formValues);
+       
     };
 
-    useEffect(() => {
+    // useEffect(() => {
         
-        if (Object.keys(formErrors).length === 0 && isSubmit) {
-        }
-    }, [formErrors]);
+    //     if (Object.keys(formErrors).length === 0 && isSubmit) {
+    //     }
+    // }, [formErrors]);
 
 
     const validate = (values) => {
@@ -148,7 +167,7 @@ function RegisterComponent() {
     };
 
     const handlerButton = ()=>{
-        if(true)
+        if(false)
         {
         return(
             <div className="d-flex justify-content-between">
@@ -163,23 +182,23 @@ function RegisterComponent() {
         </div>
         )}
     }
-    const tableRows = listItem.map((data,index) => {
-        return (
-          <tr key={index}>
-            <td>{data.name}</td>
-            <td>{data.email}</td>
-            <td>{data.dob}</td>
-            <td>{data.gender}</td>
-            <td>{data.eduLevel}</td>
-            <td><img width="30" height="30" src="https://st.depositphotos.com/2101611/3925/v/950/depositphotos_39258143-stock-illustration-businessman-avatar-profile-picture.jpg"/></td>
-            <td >
-                <button className="btn btn-warning mx-2" data-item={data} onClick={() => handleChoosedRow(data,index)}>Edit</button>
-                <button className="btn btn-danger mx-auto" onClick={() => removeHandler(index)}>Delete</button>
-            </td>
+    // const tableRows = listItem.map((data,index) => {
+    //     return (
+    //       <tr key={index}>
+    //         <td>{data.name}</td>
+    //         <td>{data.email}</td>
+    //         <td>{data.dob}</td>
+    //         <td>{data.gender}</td>
+    //         <td>{data.eduLevel}</td>
+    //         <td><img width="30" height="30" src="https://st.depositphotos.com/2101611/3925/v/950/depositphotos_39258143-stock-illustration-businessman-avatar-profile-picture.jpg"/></td>
+    //         <td >
+    //             <button className="btn btn-warning mx-2" data-item={data} onClick={() => handleChoosedRow(data,index)}>Edit</button>
+    //             <button className="btn btn-danger mx-auto" onClick={() => removeHandler(index)}>Delete</button>
+    //         </td>
             
-          </tr>
-        );
-      });
+    //       </tr>
+    //     );
+    //   });
 
   return (
     <div className="row">
@@ -198,10 +217,10 @@ function RegisterComponent() {
               type="text"
               name="name"
               placeholder="Name"
-              value={formValues.name}
+              // value={formValues.name}
               onChange={handleChange}
             />
-            <p className="text-danger">{formErrors.name}</p>
+            {/* <p className="text-danger">{formErrors.name}</p> */}
           </div>
           
           <div className="col">
@@ -212,10 +231,10 @@ function RegisterComponent() {
                 type="text"
                 name="email"
                 placeholder="Email"
-                value={formValues.email}
+                // value={formValues.email}
                 onChange={handleChange}
             />
-              <p className="text-danger">{formErrors.email}</p>
+              {/* <p className="text-danger">{formErrors.email}</p> */}
           </div>
           
 
@@ -273,7 +292,7 @@ function RegisterComponent() {
          <input className="form-control" type="file" accept="image/*" name="imgpic" onChange={handleChange}/>
        
         </div>
-        <p className="text-danger">{formErrors.pic}</p>
+        {/* <p className="text-danger">{formErrors.pic}</p> */}
 
 
           <div className="col my-3">
@@ -295,11 +314,11 @@ function RegisterComponent() {
               type="password"
               name="password"
               placeholder="Password"
-              value={formValues.password}
+              // value={formValues.password}
               onChange={handleChange}
             />
           </div>
-          <p className="text-danger">{formErrors.password}</p>
+          {/* <p className="text-danger">{formErrors.password}</p> */}
 
           <div className="col my-3">
             <label>Confirm Password</label>
@@ -309,11 +328,11 @@ function RegisterComponent() {
               type="password"
               name="conpassword"
               placeholder="Confirm Password"
-              value={formValues.conpassword}
+              // value={formValues.conpassword}
               onChange={handleChange}
             />
           </div>
-          <p className="text-danger">{formErrors.conpassword}</p>
+          {/* <p className="text-danger">{formErrors.conpassword}</p> */}
           {/* <button className="btn btn-primary mb-4">Submit</button> */}
           {handlerButton()}
         </div>
@@ -327,7 +346,7 @@ function RegisterComponent() {
         <div className="col">
         <div>
         
-        <table className="table table-striped">
+        <table className="table ">
             <thead>
                 <tr>
                 <th >Name</th>
@@ -341,7 +360,7 @@ function RegisterComponent() {
                 </tr>
             </thead>
             <tbody>
-            {tableRows}
+            {/* {tableRows} */}
             </tbody>
         </table>
     </div>
