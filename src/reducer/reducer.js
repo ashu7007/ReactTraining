@@ -76,12 +76,21 @@ export const formDataSlice= createSlice({
     },
 
 
-
-    removeUser: state => {
-      // state.listItem -= 1
-    },
-    updateUser: (state, action) => {
-      // state.listItem += action.payload
+    updateUser: (state) => {
+      // setFormErrors(validate(formValues));
+        state.IsSubmit=true;
+        state.listItem[state.currentItem]= state.formValues;
+        state.listItem = [...state.listItem];
+        state.isEdit=false;
+        state.formValues={ name: "", 
+                        email: "", 
+                        dob:"",
+                        imgpic:"",
+                        gender:"",
+                        eduLevel:"",
+                        password: "",
+                        conpassword:"",
+                    };
     },
 
     updateFormValues: (state, action)=>{
@@ -92,16 +101,39 @@ export const formDataSlice= createSlice({
     deleteRecord: (state, action)=>{
       state.listItem.splice(action.payload.index, 1);
       state.listItem = [...state.listItem];
-    }
+    },
+
+    setFormValues:(state, action)=>{
+      state.currentItem = action.payload.index;
+      state.isEdit= true;
+      state.formValues = { name: action.payload.row.name, 
+                        email: action.payload.row.email, 
+                        dob: action.payload.row.dob,
+                        imgpic: action.payload.row.imgpic,
+                        gender: action.payload.row.gender,
+                        eduLevel: action.payload.row.eduLevel,
+                        password: action.payload.row.password,
+                        conpassword: action.payload.row.conpassword,
+                    };
+    },
+
+    cancelAction:(state) => {
+      state.IsSubmit = true;
+      state.isEdit = false;
+      state.formValues = { name: "", 
+                      email: "", 
+                      dob:"",
+                      imgpic:"",
+                      gender:"",
+                      eduLevel:"",
+                      password: "",
+                      conpassword:"",
+                  };
+        }
   }
 })
 
-// const store = configureStore({
-//     reducer: {
-//       someReducer: formDataSlice.reducer,
-//     }
-//   })
-// Action creators are generated for each case reducer function
-export const { addUser, removeUser, updateUser, updateFormValues, deleteRecord } = formDataSlice.actions
+
+export const { addUser, updateUser, updateFormValues, deleteRecord, setFormValues, cancelAction } = formDataSlice.actions
 
 export default formDataSlice.reducer

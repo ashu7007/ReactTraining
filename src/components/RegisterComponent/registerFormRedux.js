@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import DatePicker from "react-datepicker"; 
 import Select from "react-select";
 import { useSelector, useDispatch } from 'react-redux'
-import { addUser,updateFormValues, deleteRecord} from "../../reducer/reducer";
+import { addUser,updateFormValues, deleteRecord, setFormValues, updateUser, cancelAction} from "../../reducer/reducer";
 
 import "react-datepicker/dist/react-datepicker.css";  
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -14,8 +14,9 @@ function RegisterComponent() {
     const listItem = useSelector((state) => state.formValue.listItem);
     
     const formErrors = useSelector((state) => state.formErrors);
-    const isSubmit = useSelector((state) => state.IsSubmit);
-    const currentItem = useSelector((state) => state.currentItem);
+    const isSubmit = useSelector((state) => state.formValue.IsSubmit);
+    const isEdit = useSelector((state) => state.formValue.isEdit);
+    const currentItem = useSelector((state) => state.formValue.currentItem);
     const dispatch = useDispatch()
 
     // const [listItem,setlistItem] = useState([]);
@@ -61,57 +62,20 @@ function RegisterComponent() {
     };
 
     const handleChoosedRow = (row,index) => {
-        // setCurrentItem(index);
-        // setIsEdit(true);
-        // handlerButton();
-        // setFormValues({ name: row.name, 
-        //                 email: row.email, 
-        //                 dob:row.dob,
-        //                 imgpic:row.imgpic,
-        //                 gender:row.gender,
-        //                 eduLevel:row.eduLevel,
-        //                 password:row.password,
-        //                 conpassword:row.conpassword,
-        //             });
-
+        dispatch(setFormValues({row,index}));
+        handlerButton();
       };
 
 
       const onEdit = (e) => {
         e.preventDefault();
-        // setFormErrors(validate(formValues));
-        // // setIsSubmit(true);
-        // listItem[currentItem]= formValues;
-        // setlistItem(listItem => [...listItem]);
-        // setIsEdit(false);
-        // handlerButton();
-        // console.log(e);
-
-        // // setlistItem(...formValues);
-        // setFormValues({ name: "", 
-        //                 email: "", 
-        //                 dob:"",
-        //                 imgpic:"",
-        //                 gender:"",
-        //                 eduLevel:"",
-        //                 password: "",
-        //                 conpassword:"",
-        //             });
+        dispatch(updateUser());
+        handlerButton();
     };
 
     const handleCancel = () => {
-        // setIsSubmit(true);
-        // setIsEdit(false);
-        // handlerButton();
-        // setFormValues({ name: "", 
-        //                 email: "", 
-        //                 dob:"",
-        //                 imgpic:"",
-        //                 gender:"",
-        //                 eduLevel:"",
-        //                 password: "",
-        //                 conpassword:"",
-        //             });
+        dispatch(cancelAction());
+        handlerButton();
     };
 
     const handleSubmit = (e) => {
@@ -169,7 +133,7 @@ function RegisterComponent() {
     };
 
     const handlerButton = ()=>{
-        if(false)
+        if(isEdit===true)
         {
         return(
             <div className="d-flex justify-content-between">
@@ -220,7 +184,7 @@ function RegisterComponent() {
               type="text"
               name="name"
               placeholder="Name"
-              // value={formValues.name}
+              value={formValues.name}
               onChange={handleChange}
             />
             {/* <p className="text-danger">{formErrors.name}</p> */}
@@ -234,7 +198,7 @@ function RegisterComponent() {
                 type="text"
                 name="email"
                 placeholder="Email"
-                // value={formValues.email}
+                value={formValues.email}
                 onChange={handleChange}
             />
               {/* <p className="text-danger">{formErrors.email}</p> */}
@@ -317,7 +281,7 @@ function RegisterComponent() {
               type="password"
               name="password"
               placeholder="Password"
-              // value={formValues.password}
+              value={formValues.password}
               onChange={handleChange}
             />
           </div>
@@ -331,7 +295,7 @@ function RegisterComponent() {
               type="password"
               name="conpassword"
               placeholder="Confirm Password"
-              // value={formValues.conpassword}
+              value={formValues.conpassword}
               onChange={handleChange}
             />
           </div>
